@@ -22,11 +22,37 @@ const CrearBarril = (barril) => {
 
 const GuardarDB = (barril) => {
     localStorage.setItem('entregados', JSON.stringify(arrayBarriles));
+    LeerDB();
 
 }
 
 const LeerDB = () => {
     listaBarrilesU.innerHTML = '';
+
+    arrayBarriles = JSON.parse(localStorage.getItem('entregados'));
+    if(arrayBarriles === null){
+        arrayBarriles = [];
+    } else {
+        arrayBarriles.forEach(element => {
+           listaBarrilesU.innerHTML += `<div class="alert alert-primary mt-4" role="alert">
+           <span class="material-icons float-left mr-2">
+               sports_bar
+           </span>
+           <b>${element.barril}</b> - ${element.estado}
+           <span class="float-right">
+               <span class="material-icons">
+                   add_circle
+               </span>
+               <span class="material-icons">
+                   edit
+               </span>
+               <span class="material-icons">
+                   delete
+               </span>
+           </span>
+       </div>`
+        });
+    }
 }
 //Eventos
 
