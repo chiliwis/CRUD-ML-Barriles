@@ -30,30 +30,20 @@ const LeerDB = () => {
     listaBarrilesU.innerHTML = '';
 
     arrayBarriles = JSON.parse(localStorage.getItem('entregados'));
-    if(arrayBarriles === null){
+    if (arrayBarriles === null) {
         arrayBarriles = [];
     } else {
         arrayBarriles.forEach(element => {
-           listaBarrilesU.innerHTML += `<div class="alert alert-primary mt-4" role="alert">
-           <span class="material-icons float-left mr-2">
-               sports_bar
-           </span>
-           <b>${element.barril}</b> - ${element.estado}
-           <span class="float-right">
-               <span class="material-icons">
-                   add_circle
-               </span>
-               <span class="material-icons">
-                   edit
-               </span>
-               <span class="material-icons">
-                   delete
-               </span>
-           </span>
-       </div>`
+            listaBarrilesU.innerHTML += `<div class="alert alert-primary mt-4" role="alert"><span class="material-icons float-left mr-2">sports_bar</span><b>${element.barril}</b> - ${element.estado}<span class="float-right"><span class="material-icons">add_circle</span><span class="material-icons">edit</span><span class="material-icons">delete</span></span>/div>`
         });
     }
 }
+
+const eliminarDB = (barril) => {
+ 
+}
+
+
 //Eventos
 
 formularioU.addEventListener('submit', (e) => {
@@ -74,9 +64,22 @@ document.addEventListener('DOMContentLoaded', LeerDB);
 
 listaBarrilesU.addEventListener('click', (e) => {
     e.preventDefault();
-    if(e.target.innerHTML === 'add_circle' || e.target.innerHTML === 'edit' || e.target.innerHTML === 'delete'){
-       
-        console.log(e.path[2].childNodes[1].innerHTML);
-        console.log(e.target);
+
+    
+
+   
+
+    if (e.target.innerHTML === 'add_circle'||e.target.innerHTML === 'edit'||e.target.innerHTML === 'delete' ) {
+
+        let texto = e.path[2].childNodes[1].innerHTML;
+      if (e.target.innerHTML === 'add_circle') {
+        
+      } 
+      if (e.target.innerHTML === 'edit') {
+        
+      }
+      if (e.target.innerHTML === 'delete') {
+        eliminarDB(texto);
+      }
     }
 });
