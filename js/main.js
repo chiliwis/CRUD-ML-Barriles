@@ -40,7 +40,16 @@ const LeerDB = () => {
 }
 
 const eliminarDB = (barril) => {
- 
+    let indexArray;
+    arrayBarriles.forEach((elemento, index) => {
+
+        if (elemento.barril === barril) {
+            indexArray = index;
+        }
+    });
+
+    arrayBarriles.splice(indexArray,1);
+    GuardarDB();
 }
 
 
@@ -65,21 +74,19 @@ document.addEventListener('DOMContentLoaded', LeerDB);
 listaBarrilesU.addEventListener('click', (e) => {
     e.preventDefault();
 
-    
 
-   
 
-    if (e.target.innerHTML === 'add_circle'||e.target.innerHTML === 'edit'||e.target.innerHTML === 'delete' ) {
+
+
+    if (e.target.innerHTML === 'edit' || e.target.innerHTML === 'delete') {
 
         let texto = e.path[2].childNodes[1].innerHTML;
-      if (e.target.innerHTML === 'add_circle') {
-        
-      } 
-      if (e.target.innerHTML === 'edit') {
-        
-      }
-      if (e.target.innerHTML === 'delete') {
-        eliminarDB(texto);
-      }
+    
+        if (e.target.innerHTML === 'edit') {
+
+        }
+        if (e.target.innerHTML === 'delete') {
+            eliminarDB(texto);
+        }
     }
 });
