@@ -71,3 +71,12 @@ formularioU.addEventListener('submit', (e) => {
 });
 
 document.addEventListener('DOMContentLoaded', LeerDB);
+
+listaBarrilesU.addEventListener('click', (e) => {
+    e.preventDefault();
+    if(e.target.innerHTML === 'add_circle' || e.target.innerHTML === 'edit' || e.target.innerHTML === 'delete'){
+       
+        console.log(e.path[2].childNodes[1].innerHTML);
+        console.log(e.target);
+    }
+});
