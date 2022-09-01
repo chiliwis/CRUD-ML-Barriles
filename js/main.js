@@ -34,7 +34,13 @@ const LeerDB = () => {
         arrayBarriles = [];
     } else {
         arrayBarriles.forEach(element => {
-            listaBarrilesU.innerHTML += `<div class="alert alert-primary mt-4" role="alert"><span class="material-icons float-left mr-2">sports_bar</span><b>${element.barril}</b> - ${element.estado}<span class="float-right"><span class="material-icons">add_circle</span><span class="material-icons">edit</span><span class="material-icons">delete</span></span>/div>`
+            if(element.estado){
+                listaBarrilesU.innerHTML += `<div class="alert alert-primary mt-4" role="alert"><span class="material-icons float-left mr-2">sports_bar</span><b>${element.barril}</b> - ${element.estado}<span class="float-right"><span class="material-icons">edit</span><span class="material-icons">delete</span></span></div>`
+
+            }else{
+                listaBarrilesU.innerHTML += `<div class="alert alert-secondary mt-4" role="alert"><span class="material-icons float-left mr-2">sports_bar</span><b>${element.barril}</b> - ${element.estado}<span class="float-right"><span class="material-icons">edit</span><span class="material-icons">delete</span></span></div>`
+            }
+
         });
     }
 }
@@ -52,21 +58,21 @@ const eliminarDB = (barril) => {
     GuardarDB();
 }
 
+const editarDB = (barril) => {
+    let indexArray = arrayBarriles.findIndex((elemento)=>elemento.barril === barril);
+  
+    arrayBarriles[indexArray].estado=true;
+    GuardarDB();
+}
 
 //Eventos
 
 formularioU.addEventListener('submit', (e) => {
-
     e.preventDefault();
     let barrilU = document.querySelector('#barril').value;
-
     CrearBarril(barrilU);
-
     GuardarDB();
-
     formularioU.reset();
-
-
 });
 
 document.addEventListener('DOMContentLoaded', LeerDB);
@@ -74,15 +80,12 @@ document.addEventListener('DOMContentLoaded', LeerDB);
 listaBarrilesU.addEventListener('click', (e) => {
     e.preventDefault();
 
-
-
-
-
     if (e.target.innerHTML === 'edit' || e.target.innerHTML === 'delete') {
 
         let texto = e.path[2].childNodes[1].innerHTML;
     
         if (e.target.innerHTML === 'edit') {
+            editarDB(texto);
 
         }
         if (e.target.innerHTML === 'delete') {
